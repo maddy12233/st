@@ -1,0 +1,67 @@
+#include <stdio.h> 
+void showMenu(); 
+void checkBalance(float balance); 
+void depositMoney(float *balance); 
+void withdrawMoney(float *balance); 
+int main() { 
+float balance = 0.0f;
+int option; 
+while (1) { 
+showMenu(); 
+printf("Choose an option: "); 
+scanf("%d", &option); 
+switch (option) { 
+case 1: 
+checkBalance(balance); 
+break; 
+case 2: 
+depositMoney(&balance); 
+break; 
+case 3: 
+withdrawMoney(&balance); 
+break; 
+case 4: 
+printf("Exiting the banking application.\n"); 
+return 0; 
+default: 
+printf("Invalid option. Please try again.\n"); 
+} 
+} 
+return 0; 
+} 
+void showMenu() { 
+printf("\n*** Banking Application Menu ***\n"); 
+printf("1. Check Balance\n"); 
+printf("2. Deposit Money\n"); 
+printf("3. Withdraw Money\n"); 
+printf("4. Exit\n"); 
+} 
+void checkBalance(float balance) { 
+printf("Your current balance is:Rs.%.2f\n", balance); 
+} 
+void depositMoney(float *balance) { 
+float amount; 
+printf("Enter amount to deposit: "); 
+scanf("%f", &amount); 
+if (amount > 0) { 
+*balance += amount; 
+printf("Successfully depositedRs.%.2f\n", amount); 
+printf("New balance is:Rs.%.2f\n", *balance); 
+} else { 
+printf("Invalid amount. Please enter a positive number.\n"); 
+} 
+} 
+void withdrawMoney(float *balance) { 
+float amount; 
+printf("Enter amount to withdraw: "); 
+scanf("%f", &amount); 
+if (amount > 0 && amount <= *balance) { 
+*balance -= amount; 
+printf("Successfully withdrewRs.%.2f\n", amount); 
+printf("New balance is:Rs.%.2f\n", *balance); 
+} else if (amount > *balance) { 
+printf("Insufficient balance to withdraw that amount.\n"); 
+} else { 
+printf("Invalid amount. Please enter a positive number.\n"); 
+} 
+}

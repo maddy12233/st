@@ -1,0 +1,59 @@
+//1a
+#include <stdio.h> 
+int main() { 
+int i, choice; 
+// For loop demonstration: Print numbers from 1 to 5 
+printf("For loop output: "); 
+for (i = 1; i <= 5; i++) { 
+printf("%d ", i); 
+} 
+printf("\n"); 
+}
+//1b
+ #include <stdio.h>
+ int main(){
+int a = 10, b = 5; 
+int choice;
+printf("Enter choice (1:Add, 2:Subtract, 3:Multiply, 4:Divide): "); 
+scanf("%d", &choice); 
+switch(choice) { 
+case 1: 
+printf("Addition is %d\n", a + b); 
+break; 
+case 2: 
+printf("Subtraction is %d\n", a - b); 
+break; 
+case 3: 
+printf("Multiplication is %d\n", a * b); 
+break; 
+case 4: 
+printf("Division is %d\n", a / b); 
+break; 
+default: 
+printf("Invalid choice\n"); 
+}
+}
+//1c
+#include<stdio.h>
+int main(){
+int i=10;
+printf("Do..While loop output: "); 
+do { 
+printf("%d ", i); 
+i++; 
+} while (i <= 15); 
+printf("\n"); 
+}
+
+//1d
+#include<stdio.h>
+int main(){
+int num = 15; 
+printf("If..Else output: "); 
+if (num % 2 == 0) { 
+printf("%d is even.\n", num); 
+} else { 
+printf("%d is odd.\n", num); 
+} 
+return 0;
+}

@@ -1,0 +1,126 @@
+#include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #define MAX 100
+ typedef struct {
+ char name[50];
+ int age;
+ char gender[10];
+ char phone[15];
+ } Passenger;
+ typedef struct {
+ int ticketNumber;
+ Passenger passenger;
+ char from[50];
+ char to[50];
+ char date[15];
+ char trainNumber[10];
+ char seatClass[20];
+ float price;
+ } Booking;
+ Booking bookings[MAX];
+ int bookingCount = 0;
+ void registerPassenger(Passenger *passenger) {
+ printf("Enter Name: ");
+ scanf("%s", passenger->name);
+ printf("Enter Age: ");
+ scanf("%d", &passenger->age);
+ printf("Enter Gender: ");
+ scanf("%s", passenger->gender);
+ printf("Enter Phone Number: ");
+ scanf("%s", passenger->phone);
+ }
+ void bookTicket() {
+ if (bookingCount >= MAX) {
+ printf("No more bookings can be made.\n");
+ return;
+ }
+ Booking newBooking;
+ newBooking.ticketNumber = bookingCount + 1;
+ printf("Enter journey details:\n");
+ registerPassenger(&newBooking.passenger);
+ printf("From: ");
+ scanf("%s", newBooking.from);
+ printf("To: ");
+ scanf("%s", newBooking.to);
+ printf("Date of Journey (dd-mm-yyyy): ");
+ scanf("%s", newBooking.date);
+ printf("Train Number: ");
+ scanf("%s", newBooking.trainNumber);
+ printf("Class (Economy/Sleeper/First Class): ");
+ scanf("%s", newBooking.seatClass);
+ newBooking.price = 100.0; 
+ bookings[bookingCount++] = newBooking;
+ printf("Ticket booked successfully! Your ticket number is %d.\n",newBooking.ticketNumber);
+ }
+ void cancelTicket() {
+ int ticketNumber;
+ printf("Enter ticket number to cancel: ");
+ scanf("%d", &ticketNumber);
+ int found = 0;
+ for (int i = 0; i < bookingCount; i++) {
+ if (bookings[i].ticketNumber == ticketNumber) {
+ found = 1;
+ for (int j = i; j < bookingCount- 1; j++) {
+ bookings[j] = bookings[j + 1];
+}
+ bookingCount--;
+ printf("Ticket %d canceled successfully.\n", ticketNumber);
+ break;
+ }
+ }
+ if (!found) {
+ printf("Ticket number %d not found.\n", ticketNumber);
+ }
+ }
+ void displayTickets() {
+ if (bookingCount == 0) {
+ printf("No bookings available.\n");
+ return;
+ }
+ for (int i = 0; i < bookingCount; i++) {
+ Booking b = bookings[i];
+ printf("\nTicket Number: %d\n", b.ticketNumber);
+ printf("Name: %s\n", b.passenger.name);
+ printf("Age: %d\n", b.passenger.age);
+ printf("Gender: %s\n", b.passenger.gender);
+ printf("Phone: %s\n", b.passenger.phone);
+ printf("From: %s\n", b.from);
+ printf("To: %s\n", b.to);
+ printf("Date: %s\n", b.date);
+ printf("Train Number: %s\n", b.trainNumber);
+ printf("Class: %s\n", b.seatClass);
+ printf("Price: $%.2f\n", b.price);
+ }
+ }
+ void menu() {
+ int choice;
+ while (1) {
+ printf("\nRailway Reservation System\n");
+ printf("1. Book Ticket\n");
+ printf("2. Cancel Ticket\n");
+ printf("3. Display Booked Tickets\n");
+ printf("4. Exit\n");
+ printf("Enter your choice: ");
+ scanf("%d", &choice);
+ switch (choice) {
+ case 1:
+ bookTicket();
+break;
+ case 2:
+ cancelTicket();
+ break;
+ case 3:
+ displayTickets();
+ break;
+ case 4:
+ exit(0);
+ default:
+ printf("Invalid choice. Please try again.\n");
+ }
+ }
+ }
+ int main() {
+ menu();
+ return 0;
+ }
